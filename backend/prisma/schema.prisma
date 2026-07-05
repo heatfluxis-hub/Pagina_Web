@@ -1,0 +1,124 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+}
+
+model Hero {
+  id        Int    @id @default(autoincrement())
+  badge     String
+  titulo    String
+  subtitulo String
+  stat1     Int
+  stat2     Int
+  stat3     Int
+  stat4     Int
+  imagenId  Int?
+}
+
+model Servicio {
+  id          Int      @id @default(autoincrement())
+  numero      String
+  titulo      String
+  descripcion String
+  features    String[]
+  orden       Int      @default(0)
+  imagenId    Int?
+}
+
+model Proyecto {
+  id        Int     @id @default(autoincrement())
+  titulo    String
+  categoria String
+  ubicacion String
+  emoji     String
+  destacado Boolean @default(false)
+  orden     Int     @default(0)
+  imagenId  Int?
+}
+
+model Contador {
+  id     Int    @id @default(autoincrement())
+  numero Int    @default(0)
+  suffix String @default("+")
+  label  String
+  orden  Int    @default(0)
+}
+
+model Nosotros {
+  id           Int    @id @default(autoincrement())
+  descripcion1 String
+  descripcion2 String
+  aniosExp     Int
+  imagenId     Int?
+}
+model Imagen {
+  id        Int      @id @default(autoincrement())
+  nombre    String
+  mimeType  String
+  data      Bytes
+  createdAt DateTime @default(now())
+}
+model Configuracion {
+  id            Int     @id @default(autoincrement())
+  // Marca
+  nombreEmpresa String  @default("HEATFLUIX")
+  sublema       String  @default("INDUSTRIAL SOLUTIONS")
+  logoId        Int?
+  // Footer
+  footerDesc    String  @default("Especialistas en reparación, mantenimiento y fabricación de equipos de intercambio térmico para la industria.")
+  copyright     String  @default("© 2024 HeatFluix Industrial Solutions SAC. Todos los derechos reservados.")
+  // Redes sociales
+  linkedin      String  @default("")
+  facebook      String  @default("")
+  whatsapp      String  @default("")
+}
+
+model ValorNosotros {
+  id     Int    @id @default(autoincrement())
+  icono  String
+  titulo String
+  desc   String
+  orden  Int    @default(0)
+}
+
+model Porque {
+  id     Int    @id @default(autoincrement())
+  icono  String
+  titulo String
+  desc   String
+  orden  Int    @default(0)
+}
+
+model WhatsappConfig {
+  id         Int     @id @default(autoincrement())
+  titulo     String  @default("HeatFluix")
+  estado     String  @default("En línea · responde en minutos")
+  bienvenida String  @default("¡Hola! 👋 Elige con quién deseas conversar y te atendemos por WhatsApp.")
+  activo     Boolean @default(true)
+}
+
+model WhatsappContacto {
+  id     Int    @id @default(autoincrement())
+  nombre String
+  cargo  String
+  numero String
+  color  String @default("#FF6B1A")
+  orden  Int    @default(0)
+}
+model Contacto {
+  id        Int    @id @default(autoincrement())
+  telefono  String
+  email     String
+  direccion String
+}
